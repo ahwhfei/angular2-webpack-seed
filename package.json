@@ -6,5 +6,10 @@
   "scripts": {},
   "devDependencies": {
     "webpack": "^2.2.0-rc.3"
+  },
+  "dependencies": {
+    "@angular/common": "^2.4.2",
+    "@angular/core": "^2.4.2",
+    "@angular/platform-browser-dynamic": "^2.4.2"
   }
 }
