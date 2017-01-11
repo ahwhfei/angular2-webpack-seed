@@ -2,7 +2,7 @@
   "name": "angular2-seed",
   "version": "1.0.0",
   "description": "",
-  "main": "main.ts",
+  "main": "dist/main.js",
   "scripts": {},
   "devDependencies": {
     "webpack": "^2.2.0-rc.3"
