@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.ts",
-  "scripts": {
-    
+  "scripts": {},
+  "devDependencies": {
+    "webpack": "^2.2.0-rc.3"
   }
 }
