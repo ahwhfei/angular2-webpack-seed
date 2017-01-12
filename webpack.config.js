@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     entry: './src/main.ts',
     module: {
@@ -11,7 +13,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: './dist'
+        path: path.resolve(__dirname, 'dist')
     },
     resolve: {
         extensions: ['.js', '.ts']
