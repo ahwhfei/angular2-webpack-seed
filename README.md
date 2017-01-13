@@ -11,7 +11,7 @@ cd angular2-webpack-seed
 # Create package.json
 npm init
 ```
-package.json is generated, remove some properies like below
+`package.json` is generated, remove some properies like below
 ```json
 {
   "name": "ng2demo",
@@ -32,8 +32,8 @@ git init
 ```bash
 npm install webpack@beta --save-dev
 ```
-webpack is a dev tool, it is not used in product souce code, so we use --save-dev option
-* Create .gitignore file for ignore some careless files
+webpack is a dev tool, it is not used in product souce code, so we use `--save-dev` option
+* Create `.gitignore` file for ignore some careless files
 ```text
 node_modules\
 ```
@@ -96,7 +96,7 @@ export class AppComponent {
   title = 'app works!';
 }
 ```
-require will extend refernce file's content to here, if don't use require, we can use templateUrl and styleUrls
+require will extend refernce file's content to here, if don't use require, we can use `templateUrl` and `styleUrls`
 ```typescript
 templateUrl: 'src/app/app.component.html',
 styleUrls: ['src/app/app.component.less']
@@ -125,12 +125,13 @@ import { Component } from '@angular/core'; //in app.component.ts
 import { NgModule } from '@angular/core'; //in app.module.ts
 ```
 
-* These imports depend on "@angular/core", let's install it
+* These imports depend on `@angular/core`, let's install it
 ```bash
 npm install @angular/core --save
 ```
-@angular/core is used in souce code, it is not a dev tool, so we use --save option, not --save-dev
-@angular/core also depends on rxjs and zone.js
+`@angular/core` is used in souce code, it is not a dev tool, so we use `--save` option, not `--save-dev`
+
+`@angular/core` also depends on `rxjs` and `zone.js`
 ```text
 ng2demo@1.0.0 F:\dev\ng2demo
 +-- @angular/core@2.4.3
@@ -143,7 +144,7 @@ ng2demo@1.0.0 F:\dev\ng2demo
 npm install rxjs zone.js --save
 ```
 
-* Create webpack.config.js in root folder, add configuartion
+* Create `webpack.config.js` in root folder, add configuartion
 ```javacript
 module.exports = {
     entry: './src/main.ts',
@@ -153,7 +154,7 @@ module.exports = {
     }
 }
 ```
-We just write a very simple webpack config file, we will meet many problems, let's fix them one by one. Running "webpack", or runing "webpack --config webpack.config.js". Due to ues default filename webpack.config.js, --config is optional. 
+We just write a very simple webpack config file, we will meet many problems, let's fix them one by one. Running `webpack`, or runing `webpack --config webpack.config.js`. Due to ues default filename webpack.config.js, --config is optional. 
 
 Errors
 ```text
