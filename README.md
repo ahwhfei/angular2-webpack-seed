@@ -32,7 +32,7 @@ git init
 ```bash
 npm install webpack@beta --save-dev
 ```
-
+webpack is a dev tool, it is not used in product souce code, so we use --save-dev option
 * Create .gitignore file for ignore some careless files
 ```text
 node_modules\
@@ -76,9 +76,69 @@ node_modules\
     {{title}}
 </h1>
 ```
-* App simple style in ap/app.component.less
+* App simple style in app/app.component.less
 ```less
 h1 {
     color: red;
 }
+```
+
+* Add component content in app/app.component.ts
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: require('./app.component.html'),
+  styles: [require('./app.component.less')]
+})
+export class AppComponent {
+  title = 'app works!';
+}
+```
+require will extend refernce file's content to here, if don't use require, we can use templateUrl and styleUrls
+```typescript
+templateUrl: 'src/app/app.component.html',
+styleUrls: ['src/app/app.component.less']
+```
+
+* Add component in module, app.module.ts
+```typescript
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Now we import these stuff
+```typescript
+import { Component } from '@angular/core'; //in app.component.ts
+import { NgModule } from '@angular/core'; //in app.module.ts
+```
+
+* These imports depend on "@angular/core", let's install it
+```bash
+npm install @angular/core --save
+```
+@angular/core is used in souce code, it is not a dev tool, so we use --save option, not --save-dev
+@angular/core also depends on rxjs and zone.js
+```text
+ng2demo@1.0.0 F:\dev\ng2demo
++-- @angular/core@2.4.3
++-- UNMET PEER DEPENDENCY rxjs@^5.0.1
+`-- UNMET PEER DEPENDENCY zone.js@^0.7.2
+```
+
+* Let's install rxjs, zone.js
+```bash
+npm install rxjs zone.js --save
 ```
