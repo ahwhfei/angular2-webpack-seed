@@ -1,8 +1,7 @@
 # Angular2 seed project using webpack
 
-## Movation 
-The goal of this repo is introduce how to setup an empty, prue clean angular 2 project using webpack 2
-
+## Motivation 
+The goal of this repo is introduce how to setup an empty, prue clean angular 2 project using webpack 2. The reason why we need an empty angular2+webpack project. Because the offical seed project is build up by angularcli, its disadvanage is lower configurable than webpack. The other hand, setup a seed project is a good practise to understand modules dependency of angular2, and good understand to webpack configuration
 ## Let's start
 * Create an empty npm package
 ```bash
