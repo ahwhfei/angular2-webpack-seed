@@ -119,17 +119,27 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 ```
 
-Now we import these stuff
+* Add content for root module main.ts
+```typescript
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+```
+
+Now we have imported these stuff
 ```typescript
 import { Component } from '@angular/core'; //in app.component.ts
 import { NgModule } from '@angular/core'; //in app.module.ts
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'; //in main.ts
 ```
 
-* These imports depend on `@angular/core`, let's install it
+* These imports depend on `@angular/core` and `@angular/platform-browser-dynamic`, let's install it
 ```bash
-npm install @angular/core --save
+npm install @angular/core @angular/platform-browser-dynamic --save
 ```
-`@angular/core` is used in souce code, it is not a dev tool, so we use `--save` option, not `--save-dev`
+`@angular/core` and ``@angular/platform-browser-dynamic` is used in souce code, it is not a dev tool, so we use `--save` option, not `--save-dev`
 
 `@angular/core` also depends on `rxjs` and `zone.js`
 ```text
@@ -138,10 +148,22 @@ ng2demo@1.0.0 F:\dev\ng2demo
 +-- UNMET PEER DEPENDENCY rxjs@^5.0.1
 `-- UNMET PEER DEPENDENCY zone.js@^0.7.2
 ```
-
-* Let's install rxjs, zone.js
+* Let's install `rxjs`, `zone.js`
 ```bash
 npm install rxjs zone.js --save
+```
+
+`@angular/platform-browser-dynamic` also depends on `@angular/common`, `@angular/compiler` and `@angular/platform-browser`
+```text
++-- UNMET PEER DEPENDENCY @angular/common@2.4.3
++-- UNMET PEER DEPENDENCY @angular/compiler@2.4.3
++-- UNMET PEER DEPENDENCY @angular/platform-browser@2.4.3
+`-- @angular/platform-browser-dynamic@2.4.3
+```
+
+* Install `@angular/common`, `@angular/compiler` and `@angular/platform-browser`
+```bash
+npm install @angular/common @angular/compiler @angular/platform-browser --save
 ```
 
 * Create `webpack.config.js` in root folder, add configuartion
