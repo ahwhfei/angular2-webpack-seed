@@ -76,7 +76,7 @@ node_modules\
     {{title}}
 </h1>
 ```
-* App simple style in app/app.component.less
+* Add simple style in app/app.component.less
 ```less
 h1 {
     color: red;
@@ -142,3 +142,36 @@ ng2demo@1.0.0 F:\dev\ng2demo
 ```bash
 npm install rxjs zone.js --save
 ```
+
+* Create webpack.config.js in root folder, add configuartion
+```javacript
+module.exports = {
+    entry: './src/main.ts',
+    output: {
+        filename: '[name].js',
+        path: 'dist'
+    }
+}
+```
+We just write a very simple webpack config file, we will meet many problems, let's fix them one by one. Running "webpack", or runing "webpack --config webpack.config.js". Due to ues default filename webpack.config.js, --config is optional. 
+
+Errors
+```text
+ERROR in ./src/main.ts
+Module not found: Error: Can't resolve './app/app.module' in 'F:\dev\ng2demo\src'
+ @ ./src/main.ts 3:0-45
+
+ERROR in ./src/main.ts
+Module not found: Error: Can't resolve '@angular/platform-browser-dynamic' in 'F:\dev\ng2demo\src'
+ @ ./src/main.ts 1:0-75
+ ```
+ * According to the message, need to add `resolve` property in webpack.config.js
+ 
+ empty '' is removed from webpack2, in webpack1 need to add it, looks like extensions: ['', '.js', '.ts']
+ 
+ ```javascript
+ resolve: {
+     extensions: ['.js', '.ts']
+ }
+ ```
+ 
