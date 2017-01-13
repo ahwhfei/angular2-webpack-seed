@@ -198,3 +198,15 @@ Module not found: Error: Can't resolve '@angular/platform-browser-dynamic' in 'F
  }
  ```
  
+ Run webpack, still have errors
+ ```text
+ ERROR in ./src/app/app.module.ts
+Module parse failed: F:\dev\ng2demo\src\app\app.module.ts Unexpected character '@' (5:0)
+You may need an appropriate loader to handle this file type.
+| import { AppComponent } from './app.component';
+|
+| @NgModule({
+|   declarations: [
+|     AppComponent
+ @ ./src/main.ts 3:0-45
+ ```
