@@ -283,5 +283,73 @@ They are caused by no import typescript definition files, we can import a tool t
 ```bash
 npm install typings --save-dev
 ```
+`require` is keyword of node, so we need to import typescript definition `.d.ts` file. I don't know where can be imported `Promise`, `Set`, `Map`. But refer to other project, it's imported from `core-js`.
+
+* Search `node` typescript definition file 
+```bash
+typings search --name node
+```
+Search result
+```text
+Viewing 2 of 2
+
+NAME SOURCE HOMEPAGE           DESCRIPTION VERSIONS UPDATED
+node dt     http://nodejs.org/             2        2017-01-10T23:30:17.000Z
+node env                                   4        2017-01-02T17:57:25.000Z
+```
+* Search `core-js` typescript definition file
+```bash
+typings search --name core-js
+```
+Search result
+```text
+Viewing 1 of 1
+
+NAME    SOURCE HOMEPAGE                             DESCRIPTION VERSIONS UPDATED
+core-js dt     https://github.com/zloirock/core-js/             2        2016-11-30T13:37:42.000Z
+```
+* Install `node` and `core-js` ts definition file
+```bash
+typings install dt~node dt~core-js --global --save
+```
+This will generate `typings.json` file. It stored configuration so we only need to typings install without more options next time. `typings install` will create a `typings` folder which has a `index.d.ts` file, the file recored its dependency.
+
+typings.json content
+```json
+{
+  "globalDependencies": {
+    "core-js": "registry:dt/core-js#0.9.7+20161130133742",
+    "node": "registry:dt/node#7.0.0+20170110233017"
+  }
+}
+```
+
+* Add `typings install` to `package.json`, as `build` command
+```json
+"scripts": {
+    "build": "npm install && typings install"
+  }
+```
+
+Continue run webpack, still found errors
+```text
+ERROR in ./src/app/app.component.html
+Module parse failed: F:\dev\ng2demo\src\app\app.component.html Unexpected token (1:0)
+You may need an appropriate loader to handle this file type.
+| <h1>
+|     {{title}}
+| </h1>
+ @ ./src/app/app.component.ts 18:18-49
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ ```
+ 
+ * According to error message, we know webpack need a loader for html parsing, add `raw-loader` for html
+ ```bash
+ npm install raw-loader --save-dev
+ ```
+
+
+
 
 
