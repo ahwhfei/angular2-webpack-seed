@@ -210,3 +210,79 @@ You may need an appropriate loader to handle this file type.
 |     AppComponent
  @ ./src/main.ts 3:0-45
  ```
+ 
+ `@NgModule` is not recognized, maybe typescript is not recogrnized, let's us add `ts-loader` to have a try.
+ ```bash
+ npm install ts-loader --save-dev
+ ```
+ * Add content in `webpack.config.js`
+ ```javascript
+  module: {
+        rules: [
+            {
+                exclude: /node_modules/,
+                loader: 'ts-loader',
+                test: /\.ts$/,
+            }
+        ]
+    }
+```
+Run webpack, still have errors
+```text
+ERROR in ./src/main.ts
+Module build failed: Could not load TypeScript. Try installing with `npm install typescript`. If TypeScript is installed globally, try using `npm link typescript`.
+```
+* Install typescript
+```bash
+npm install typescript --save-dev
+```
+Run webpack, still have errors
+```text
+ERROR in error TS18002: The 'files' list in config file 'tsconfig.json' is empty.
+
+ERROR in ./src/main.ts
+Module build failed: error while parsing tsconfig.json
+```
+
+* New add tsconfig.json, can refer to [tsconfig.json](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html) page
+```json
+{
+    "compilerOptions": {
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "removeComments": false,
+        "sourceMap": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "es5"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
+```
+
+Run webpack, still have many errors
+```text
+ERROR in F:\dev\ng2demo\node_modules\@angular\compiler\src\i18n\extractor.d.ts
+(14,33): error TS2304: Cannot find name 'Promise'.
+
+ERROR in F:\dev\ng2demo\node_modules\@angular\compiler\src\output\output_ast.d.ts
+(433,63): error TS2304: Cannot find name 'Set'.
+
+ERROR in F:\dev\ng2demo\node_modules\@angular\core\src\di\reflective_provider.d.ts
+(88,165): error TS2304: Cannot find name 'Map'.
+
+ERROR in ./src/app/app.component.ts
+(5,13): error TS2304: Cannot find name 'require'.
+```
+They are caused by no import typescript definition files, we can import a tool typings, it is a [typescript definition manager](https://github.com/typings/typings). Use typings to generate `.d.ts` files
+
+* Install typings
+```bash
+npm install typings --save-dev
+```
+
+
