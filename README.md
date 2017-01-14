@@ -345,11 +345,59 @@ You may need an appropriate loader to handle this file type.
  ```
  
  * According to error message, we know webpack need a loader for html parsing, add `raw-loader` for html
+ 
  ```bash
  npm install raw-loader --save-dev
  ```
+* Add html loader in module->rules of `webpack.config.js`
 
+```json
+{
+    exclude: /node_modules/,
+    loader: 'raw-loader',
+    test: /\.html$/,
+},
+```         
+Running webpack, found that no errors. Actually we should meet less parse error, but now less file has no content. 
 
+* Add content in `app.component.less`
 
+```less
+h1 {
+  color: red;
+}
+```
+
+Errors showing for webpack running
+
+```text
+ERROR in ./src/app/app.component.less
+Module parse failed: F:\dev\ng2demo\src\app\app.component.less Unexpected token (1:3)
+You may need an appropriate loader to handle this file type.
+| h1 {
+|     color: red;
+| }
+ @ ./src/app/app.component.ts 19:17-48
+ @ ./src/app/app.module.ts
+ @ ./src/main.ts
+ ```
+ 
+* Introduce `less-loader`
+ 
+```bash
+npm install less-loader --save-dev
+```
+ Less-loader has dependency with `less`
+ 
+```text
+ +-- UNMET PEER DEPENDENCY less@^2.3.1
+`-- less-loader@2.2.3
+```
+
+* Install `less`
+ 
+ ```bash
+npm install less --save-dev
+```
 
 
