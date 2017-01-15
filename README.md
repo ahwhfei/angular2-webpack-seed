@@ -533,10 +533,4 @@ import { BrowserModule } from '@angular/platform-browser';
 imports: [BrowserModule],
 ```
 
-  
-
-
-
- 
- 
-
+Now web page is showing successfully.
