@@ -351,7 +351,7 @@ You may need an appropriate loader to handle this file type.
  ```
 * Add html loader in module->rules of `webpack.config.js`
 
-```json
+```js
 {
     exclude: /node_modules/,
     loader: 'raw-loader',
@@ -400,4 +400,16 @@ npm install less-loader --save-dev
 npm install less --save-dev
 ```
 
+* Add less-loader configuration in webpack.config.js
+```js
+{
+    exclude: /node_modules/,
+    loader: 'less-loader',
+    test: /\.less$/,
+},
+```
+
+Only add `less-loader` can't fix less file parse error. 
+ 
+ 
 
