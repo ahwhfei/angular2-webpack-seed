@@ -409,7 +409,81 @@ npm install less --save-dev
 },
 ```
 
-Only add `less-loader` can't fix less file parse error. 
+Only add `less-loader` can't fix less file parse error. Need to introduce `raw-loader`, raw-loader is for loading file as string.
+* Install raw-loader
+```bash
+npm install raw-loader --save-dev
+```
+
+* Add raw-loader configuration in webpack.config.js
+```js
+{
+    exclude: /node_modules/,
+    loaders: ['raw-loader', 'less-loader'],
+    test: /\.less$/,
+},
+```
+Now all webpack executing errors are fixed. webpack command running successfully. Next step we will see what's result the simple web app running in browser. Firstly install a tool for running http service. We will use `webpack-dev-server`
+
+webpack generated dist folder and some files etc bundles
+```text
+├───dist
+│   │   main.js
+│   │
+│   └───src
+│       │   main.d.ts
+│       │
+│       └───app
+│               app.component.d.ts
+│               app.module.d.ts
+```
+
+* Install webpack-dev-server
+```bash
+npm install webpack-dev-server --save-dev
+```
+
+* Add webpack-dev-server to package.json as npm start script
+```json
+"scripts": {
+  "start": "webpack-dev-server --inline --progress --port 8080"
+},
+```
+
+* Execute `npm start` command
+```bash
+npm start
+```
+webpack-dev-server hosts http service on port 8080, open browser, access "http://localhost:8080", only list some file structure, this is because http service doesn't find entry index html. Let's introduce a new tool [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin), it creates htmls to serve webpack bundles
+
+* Install html-webpack-plugin
+```bash
+npm install html-webpack-plugin --save-dev
+```
+
+* Configure html-webpack-plugin in webpack.config.js
+```js
+// Add before module.exports
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+// Add plugins property in module.exports
+plugins: [
+    new HtmlWebpackPlugin({
+        template: 'src/index.html'
+    })
+],
+```
+
+Show these errors in chrome browser running `npm start` to start webpack-dev-server
+```text
+Uncaught reflect-metadata shim is required when using class decorators
+```
+
+
+
+  
+
+
+
  
  
 
