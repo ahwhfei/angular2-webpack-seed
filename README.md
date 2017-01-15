@@ -477,8 +477,61 @@ Show these errors in chrome browser running `npm start` to start webpack-dev-ser
 ```text
 Uncaught reflect-metadata shim is required when using class decorators
 ```
+This error denotes [reflect-metadata](https://github.com/rbuckton/reflect-metadata) is lost in our product source code. Here you can introduce `reflect-metadata`, add it to package.json. But we will use `core-js`, because we already used it's typescript definition file in typings.json
 
+* Install core-js
+```bash
+npm install core-js --save
+```
 
+* New add a file in src folder, ployfills.ts
+```typescript
+import 'core-js/es6/reflect';
+
+import 'core-js/es7/reflect';
+```
+
+* Import ployfills in main.ts, add one line in main.ts
+```typescript
+import './ployfills'
+```
+
+The next error is 
+```text 
+Uncaught (in promise) Error: Angular requires Zone.js prolyfill.
+    at new NgZone (main.js:24049)
+    at PlatformRef_._bootstrapModuleFactoryWithZone (main.js:30419)
+```
+
+* Add zone.js in ployfills.ts
+```typescript
+import 'zone.js/dist/zone';
+```
+
+Next errors
+```text
+Unhandled Promise rejection: No ErrorHandler. Is platform module (BrowserModule) included? ; Zone: <root> ; Task: Promise.then ; Value: ZoneAwareError {stack: "Error: No ErrorHandler. Is platform module (Browse…(http://localhost:8080/main.js:72809:35) [<root>]", message: "No ErrorHandler. Is platform module (BrowserModule) included?", originalStack: "Error: No ErrorHandler. Is platform module (Browse…askQueue (http://localhost:8080/main.js:72809:35)", zoneAwareStack: "Error: No ErrorHandler. Is platform module (Browse…(http://localhost:8080/main.js:72809:35) [<root>]", name: "Error"} Error: No ErrorHandler. Is platform module (BrowserModule) included?
+    at http://localhost:8080/main.js:30427:23 [angular]
+    at Object.onInvoke (http://localhost:8080/main.js:24226:37) [angular]
+    at Zone.run (http://localhost:8080/main.js:72489:43) [<root> => angular]
+    at NgZone.run (http://localhost:8080/main.js:24095:62) [<root>]
+    at PlatformRef_._bootstrapModuleFactoryWithZone (http://localhost:8080/main.js:30422:23) [<root>]
+    at http://localhost:8080/main.js:30473:59 [<root>]
+    at Zone.run (http://localhost:8080/main.js:72489:43) [<root> => <root>]
+    at http://localhost:8080/main.js:72911:57 [<root>]
+    at Zone.runTask (http://localhost:8080/main.js:72527:47) [<root> => <root>]
+    at drainMicroTaskQueue (http://localhost:8080/main.js:72809:35) [<root>]
+```
+
+Seem lost BrowserModule, Angular2 needs it.
+
+* Import BrowserModule in app.module.ts
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+
+// Add it to @NgModule
+imports: [BrowserModule],
+```
 
   
 
