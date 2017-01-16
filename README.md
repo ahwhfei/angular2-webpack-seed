@@ -66,7 +66,7 @@ node_modules\
 </head>
 <body>
   <app-root>Loading...</app-root>
-<script type="text/javascript" src="main.js"></script></body>
+</body>
 </html>
 ```
 * Add simple html in app/app.component.html
