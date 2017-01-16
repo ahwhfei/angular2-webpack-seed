@@ -533,4 +533,24 @@ import { BrowserModule } from '@angular/platform-browser';
 imports: [BrowserModule],
 ```
 
-Now web page is showing successfully.
+Now web page is showing successfully. You can have a try running the two commands `npm run build` and `npm start`. Next step, we will introduce `tslint` and `tslint-loader` for code style checking
+
+* Install tslint and tslint-loader
+```bash
+npm install tslint tslint-loader --save-dev
+```
+
+* Init a tsling.json
+```bash
+tslint --init
+```
+
+* Add tslint-loader configuration in webpack.config.js
+```javascript
+{
+    enforce: 'pre',
+    exclude: /node_modules/,
+    loader: 'tslint-loader',
+    test: /\.ts$/,
+},
+```         
